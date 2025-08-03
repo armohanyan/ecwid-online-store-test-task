@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/vue-query'
-import {getRecentProducts} from '@/api';
+import { getRecentProducts } from '@/api'
 
-export function useRecentProductsQuery(params: { limit: number }){
+export function useRecentProductsQuery(params: { limit: number }) {
   return useQuery({
     queryKey: ['recent-products', params],
     queryFn: () => getRecentProducts(params),

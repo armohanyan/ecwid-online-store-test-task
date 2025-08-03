@@ -42,14 +42,9 @@
     "depcheck": "^1.4.7",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "firebase": "^11.6.1",
-    "firebase-admin": "^13.3.0",
-    "helmet": "^7.1.0",
+    "helmet": "^8.1.0",
     "http-errors": "^2.0.0",
-    "joi": "^17.13.3",
     "morgan": "^1.10.0",
-    "multer": "^1.4.5-lts.1",
-    "sharp": "^0.34.1",
     "winston": "^3.13.0"
   }
 }

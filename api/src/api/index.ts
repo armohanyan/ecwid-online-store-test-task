@@ -1,14 +1,10 @@
 import express, { Request, Response } from 'express';
-import auth from './auth.api';
-import generator from './generate.api';
+import * as path from 'node:path';
 
 const app = express();
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('ecwid-online-store server is active');
+  res.sendFile(path.resolve(__dirname, '../../../client/dist/index.html'));
 });
-
-app.use('/generate', generator);
-app.use('/auth', auth);
 
 export default app;
