@@ -1,0 +1,5 @@
+/generated
+/experimental
+**/dist
+**/build
+**/node_modules

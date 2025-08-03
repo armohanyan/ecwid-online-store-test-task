@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "noEmit": true,
+        "composite": true,
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "vite.config.ts",
+        "./vite.config.ts"
+    ]
+}

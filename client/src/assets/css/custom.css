@@ -1,0 +1,114 @@
+.card {
+    @apply bg-surface-0 rounded-lg p-4;
+}
+
+.label {
+    @apply text-surface-600 callout -mb-0.5;
+}
+
+
+
+.form-root {
+    @apply h-full flex flex-col justify-between space-y-3
+}
+
+/*// add class to el by data-pc-section="panelcontainer"*/
+[data-pc-section="panelcontainer"] {
+    @apply flex-grow;
+}
+
+/* TopNavBar */
+
+.navbar-key-breadcrumb[data-pc-name="breadcrumb"] [data-pc-section="menu"] {
+
+    & [data-pc-section="separator"]>span {
+        @apply w-[6px] m-0;
+    }
+
+    & [data-pc-section="menuitem"]:last-child {
+        @apply font-bold text-surface-700;
+    }
+}
+
+.navbar-key-bar ul[data-pc-section="menu"] {
+    @apply flex-nowrap gap-x-1;
+}
+
+.navbar-key-dropdown[data-pc-name="dropdown"] {
+
+    & {
+        @apply w-fit bg-transparent border-none;
+    }
+
+    & [data-pc-section="input"] {
+        @apply hidden;
+    }
+
+}
+
+[data-pc-section="end"] {
+    @apply !ml-0 w-full;
+}
+
+/* Sidebar */
+
+.sidebar-key-item {
+
+    & [data-pc-name="1"] {
+        @apply before:mx-4 before:block before:h-px
+        before:bg-surface-300 before:my-6;
+    }
+
+    & [data-pc-name="2"] {
+        @apply before:mx-4 before:block before:h-px
+        before:bg-surface-300 before:my-6;
+    }
+}
+
+/* Settings */
+
+.settings-key-accordion[data-pc-name="accordion"] {
+    @apply flex flex-col gap-y-10;
+
+    & [data-pc-name="accordiontab"] {
+        @apply m-0;
+
+        & [data-pc-section="header"] {
+
+            & [data-pc-section="headeraction"] {
+                @apply py-2 px-0 border-primary-300 border-x-0 border-t-0
+                gap-x-3 hover:bg-transparent rounded-none bg-transparent
+                text-[21px] font-bold leading-[1.33];
+            }
+        }
+
+        & [data-pc-section="accordiontab.transition"] {
+
+            & [data-pc-section="content"] {
+                @apply pl-8 py-6 pr-0 border-none rounded-none bg-transparent;
+            }
+        }
+    }
+}
+
+.settings-key-db:before {
+    content: '';
+    @apply block border border-surface-300 border-x-0
+    border-t-0 ml-auto pt-9 mb-9;
+    width: calc(100% - 288px);
+}
+
+.settings-key-fixed {
+    width: calc(100% - 264px);
+}
+
+.settings-key-switch-button {
+
+    &[data-pc-name="selectbutton"] {
+        @apply p-0 bg-surface-100 rounded-md w-[174px] flex justify-center;
+
+        & [data-pc-section="button"] {
+            @apply bg-transparent p-0 w-full;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+/**/packages/client/**/*.vue
+/**/*.vue
+/generated
+/experimental
+**/dist
+**/build
+**/node_modules
+/packages/node/proto-ts/compiled/google/

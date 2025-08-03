@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"pretty": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"allowJs": true,
+		"outDir": "dist",
+		"baseUrl": "./src",
+		"target": "ES2022",
+		"strict": true,
+		"noImplicitAny": false,
+		"typeRoots" : ["./src/types", "./node_modules/@types"]
+	},
+	"exclude": ["node_modules", "dependencies", "dist"],
+
+	"ts-node": {
+		"esm": true
+	},
+	"include": [
+		"src/**/*",
+		"src/types/**/*.d.ts" // Include the type definitions
+	]
+}
