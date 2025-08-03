@@ -1,9 +1,4 @@
 @import './css/base.css';
-@import './css/ruler.css';
-@import './css/custom.css';
-@import '@ods/ui/index.css';
+@import './css/ecwid-theme.css';
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

@@ -1,5 +1,5 @@
 {
-  "name": "Technical Task Ecwid online store",
+  "name": "ecwid-online-store-api",
   "version": "1.0.0",
   "scripts": {
     "start": "ts-node src/bin/www.ts",
@@ -21,14 +21,16 @@
     "@types/node": "^20.14.10",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
-    "eslint": "^9.26.0",
-    "eslint-config-prettier": "^10.1.2",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.3.1",
+    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-vue": "^10.4.0",
     "globals": "^15.9.0",
     "nodemon": "^3.1.4",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.2.0"
