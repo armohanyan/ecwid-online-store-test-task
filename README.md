@@ -7,6 +7,7 @@ This project is a full-stack TypeScript-based application that integrates a cust
 
 All parts are fully containerized with **Docker Compose** and can be launched with a single command.
 
+[Click here to view the demo](https://drive.google.com/file/d/1aEdQ-Yn02Xc0BxwqqF2xVxYOwRNM0Wck/view?usp=drive_link)
 ---
 
 ## 📁 Project Structure
