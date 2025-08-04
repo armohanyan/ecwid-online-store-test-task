@@ -13,7 +13,7 @@ const storeSettings =  useStoreSettings()
 const ecwidLoader = useEcwidLoader()
 
 const numberOfRecentProducts = ref(storeSettings.defaultProductCount.value)
-const params = ref({ limit: numberOfRecentProducts.value })
+const params = ref({ limit: numberOfRecentProducts.value, sortBy: 'UPDATED_TIME_DESC' })
 
 const { refetch } = useRecentProductsQuery(params.value)
 
@@ -41,7 +41,7 @@ function createWidget(products: IProduct[]) {
     const target = e.target as HTMLInputElement
 
     numberOfRecentProducts.value = parseInt(target.value)
-    params.value = { limit: numberOfRecentProducts.value }
+    params.value.limit = numberOfRecentProducts.value
 
     const result = await refetch()
     if (result.data?.items) {

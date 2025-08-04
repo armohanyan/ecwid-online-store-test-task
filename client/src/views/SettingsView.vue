@@ -65,7 +65,7 @@ const { widgetEnabled, defaultProductCount } = useStoreSettings();
 
 const products = ref<IProduct[]>([]);
 const selected = ref<IProduct[]>([]);
-const { refetch } = useRecentProductsQuery({ limit: defaultProductCount.value })
+const { refetch } = useRecentProductsQuery({ limit: defaultProductCount.value, sort: 'updated:desc' })
 
 const fetchProducts = async () => {
   const response = await refetch();
