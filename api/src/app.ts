@@ -4,7 +4,6 @@ import express from 'express';
 import morgan from 'morgan';
 import Api from './api';
 import config from './config';
-import ErrorHandlerMiddleware from './middlewares/error-handler.middleware';
 
 interface CorsOptions {
   origin?: string;
@@ -29,7 +28,6 @@ class App {
     this._setCors();
     this._setRequestParser();
     this._initializeApi();
-    this._setErrorHandler();
   }
 
   private _setRequestLogger(): void {
@@ -62,10 +60,6 @@ class App {
 
   private _initializeApi(): void {
     this.app.use('/', Api);
-  }
-
-  private _setErrorHandler(): void {
-    this.app.use(ErrorHandlerMiddleware.init);
   }
 }
 
