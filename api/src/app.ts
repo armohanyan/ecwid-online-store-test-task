@@ -1,8 +1,6 @@
-import * as path from 'node:path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
-import helmet from 'helmet';
 import morgan from 'morgan';
 import Api from './api';
 import config from './config';
@@ -23,38 +21,7 @@ class App {
   constructor() {
     this.app = express();
 
-    // Uncomment the next block to disable CSP temporarily (debugging only!)
-    this.app.use((req, res, next) => {
-      res.removeHeader('Content-Security-Policy');
-      next();
-    });
-
-    // Proper Helmet security with CSP allowing Ecwid + Cloudfront scripts
-    this.app.use(
-      helmet({
-        contentSecurityPolicy: {
-          directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: [
-              "'self'",
-              'https://app.ecwid.com',
-              'https://*.cloudfront.net',
-            ],
-            styleSrc: ["'self'", 'https://app.ecwid.com', "'unsafe-inline'"],
-            imgSrc: [
-              "'self'",
-              'data:',
-              'https://*.ecwid.com',
-              'https://*.cloudfront.net',
-            ],
-            connectSrc: ["'self'"],
-            objectSrc: ["'none'"],
-          },
-        },
-      }),
-    );
-
-    this.app.use(express.static(path.resolve(__dirname, '../..//client/dist')));
+    this.app.use('/', express.static('public'));
   }
 
   init() {
@@ -98,7 +65,7 @@ class App {
   }
 
   private _setErrorHandler(): void {
-    // this.app.use(ErrorHandlerMiddleware.init);
+    this.app.use(ErrorHandlerMiddleware.init);
   }
 }
 

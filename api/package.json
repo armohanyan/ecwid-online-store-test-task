@@ -2,11 +2,12 @@
   "name": "ecwid-online-store-api",
   "version": "1.0.0",
   "scripts": {
-    "start": "ts-node src/bin/www.ts",
+    "start": "node dist/bin/www.js",
     "dev": "nodemon  src/bin/www.ts",
     "lint": "eslint . --ext .ts --config eslint.config.js",
     "lint:fix": "eslint . --ext .ts --config eslint.config.js --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -42,7 +43,6 @@
     "depcheck": "^1.4.7",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "helmet": "^8.1.0",
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
     "winston": "^3.13.0"

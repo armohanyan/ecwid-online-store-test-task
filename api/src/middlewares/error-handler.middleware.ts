@@ -133,6 +133,6 @@ export default class ErrorHandlerMiddleware {
     }
     if (result.status >= 500) console.log(error);
 
-    response.status(result.status).json(result);
+    throw error;
   }
 }
