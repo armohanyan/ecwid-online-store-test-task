@@ -85,6 +85,7 @@ const exportSelected = () => {
 }
 
 const navigateHome = () => {
+  // todo: not good practice but as we use embed store this need to reload the js
   window.location.href = '/'
 }
 

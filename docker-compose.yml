@@ -3,22 +3,10 @@ version: '3.8'
 services:
   api:
     build:
-      context: ./api
+      context: .            # IMPORTANT: Must be root so both api/ and client/ are accessible
+      dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
-    networks:
-      - app-network
-
-  client:
-    build:
-      context: ./client
-    ports:
-      - "80:80"
-    depends_on:
-      - api
-    networks:
-      - app-network
-
 networks:
   app-network:
     driver: bridge

@@ -1,5 +1,8 @@
 # 🛍️ Ecwid Online Store – Custom Widget with Admin Settings
 
+> **Note:**  
+> Based on the task requirements, the Docker build process compiles both the Vue frontend and Node/Express backend. The built Vue app (`dist` folder) is then copied into the Express backend’s `public` folder to be served as static files. Therefore, running the Express server will serve the Vue frontend at **http://localhost:3000**.
+
 This project is a full-stack TypeScript-based application that integrates a custom **"Recently Updated Products"** widget into an Ecwid online store. It also provides an admin **settings page** where the store owner can configure the widget and export product data.
 
 All parts are fully containerized with **Docker Compose** and can be launched with a single command.
@@ -12,10 +15,7 @@ All parts are fully containerized with **Docker Compose** and can be launched wi
 ├── api/ # Express backend (TypeScript)<br>
 ├── client/ # Vue 3 frontend with Vite (TypeScript)<br>
 ├── docker-compose.yml<br>
-└── <a href="http://README.md">README.md</a></p>
-
-
----
+├── Dockerfile<br>
 
 ## 🚀 Features
 
@@ -86,13 +86,5 @@ API_ORIGIN=http://localhost:3000/
 
 ### 🐳 Running the App (via Docker)
 
-``docker-compose up --build``
+``docker compose up --build``
 
-### Task Checklist
-✅ Custom widget embedded in cart page</p>
-<p class="has-line-data" data-line-start="3" data-line-end="4">✅ Admin page with on/off toggle</p>
-<p class="has-line-data" data-line-start="5" data-line-end="6">✅ Default product count setting</p>
-<p class="has-line-data" data-line-start="7" data-line-end="8">✅ Export selected products (CSV/XLSX)</p>
-<p class="has-line-data" data-line-start="9" data-line-end="10">✅ Store owner notified via extra fields</p>
-<p class="has-line-data" data-line-start="11" data-line-end="12">✅ Entire project containerized with Docker Compose</p>
-<p class="has-line-data" data-line-start="13" data-line-end="14">✅ Written in TypeScript using modern tooling</p>

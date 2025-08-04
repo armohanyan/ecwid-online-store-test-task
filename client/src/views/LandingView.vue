@@ -11,6 +11,6 @@ import EcwidStore from '@/components/EcwidStore.vue'
 import router from "@/router";
 
 const navigateHome = () => {
-  router.push('/settings')
+  router.replace('/settings')
 }
 </script>
