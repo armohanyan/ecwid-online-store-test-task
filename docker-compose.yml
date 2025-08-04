@@ -3,7 +3,7 @@ version: '3.8'
 services:
   api:
     build:
-      context: .            # IMPORTANT: Must be root so both api/ and client/ are accessible
+      context: .
       dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
