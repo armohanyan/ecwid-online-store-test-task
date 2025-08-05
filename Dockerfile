@@ -1,4 +1,3 @@
-# Stage 1: Build frontend
 FROM node:22-alpine AS client
 
 WORKDIR /client
@@ -10,7 +9,6 @@ COPY client .
 RUN yarn build
 
 
-# Stage 2: Build backend
 FROM node:22-alpine AS build
 
 WORKDIR /app
@@ -22,7 +20,6 @@ COPY api .
 RUN yarn build
 
 
-# Final stage: production image
 FROM node:22-alpine
 
 WORKDIR /app
@@ -33,7 +30,7 @@ COPY --from=build /app/yarn.lock ./yarn.lock
 
 COPY --from=client /client/dist ./public
 
-RUN yarn install    # install all dependencies (including dev if needed)
+RUN yarn install
 
 EXPOSE 3000
 
