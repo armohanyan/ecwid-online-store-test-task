@@ -6,6 +6,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [vue()],
   resolve: {
+    extensions: ['.ts', '.js'], // this is default, but make sure it's there
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },

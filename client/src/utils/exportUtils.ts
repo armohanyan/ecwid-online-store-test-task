@@ -1,4 +1,15 @@
 import { IProduct } from '@/types/product'
+import * as XLSX from 'xlsx'
+
+export function exportToXLSX(items: IProduct[], filename = 'export.xlsx') {
+  if (!items.length) return
+
+  const worksheet = XLSX.utils.json_to_sheet(items)
+  const workbook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Products')
+
+  XLSX.writeFile(workbook, filename)
+}
 
 export function exportToCSV(items: IProduct[], filename = 'export.csv') {
   if (!items.length) return

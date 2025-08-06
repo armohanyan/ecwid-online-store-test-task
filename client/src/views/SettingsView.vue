@@ -1,6 +1,5 @@
 <template>
   <div class="ec-container">
-    <button @click="navigateHome" class="app-button">Home</button>
 
     <h1 class="ec-heading">Widget Settings</h1>
 
@@ -30,8 +29,15 @@
       <button
         v-if="selected.length"
         class="ec-btn ec-btn--primary"
-        @click="exportSelected">
-        Export Selected Products
+        @click="exportCSV">
+        Export CSV
+      </button>
+
+      <button
+          v-if="selected.length"
+          class="ec-btn ec-btn--primary"
+          @click="exportXLSX">
+          Export XLSX
       </button>
 
       <table v-if="products.length" class="ec-table">
@@ -57,7 +63,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useStoreSettings } from '@/composables/useStoreSettings';
-import { exportToCSV } from '@/utils/exportUtils';
+import { exportToCSV, exportToXLSX } from '@/utils/exportUtils';
 import {useRecentProductsQuery} from "@/composables/useRecentProductsQuery";
 import { IProduct } from '@/types/product'
 
@@ -78,10 +84,16 @@ const toggleAll = (event: Event) => {
   selected.value = isChecked ? [...products.value] : [];
 }
 
-const exportSelected = () => {
+const exportCSV = () => {
   if (!selected.value.length) return;
 
   exportToCSV(selected.value, 'selected-products.csv');
+}
+
+const exportXLSX = () => {
+  if (!selected.value.length) return;
+
+  exportToXLSX(selected.value, 'selected-products.xlsx');
 }
 
 const navigateHome = () => {
