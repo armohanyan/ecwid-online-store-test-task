@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { STORE_ID } from '@/consts'
 
 const instance = axios.create({
   timeout: 10000,
-  baseURL: import.meta.env.VITE_BASE_API_URL + import.meta.env.VITE_STORE_ID,
+  baseURL: import.meta.env.VITE_BASE_API_URL + STORE_ID,
 })
 
 instance.interceptors.request.use(

@@ -2,8 +2,8 @@
   <header class="store-header">
     <a href="/"><img src="/logo.png" alt="My Store" class="logo" /></a>
     <nav class="nav">
-      <button class="app-button" @click="navigateToHome">Home</button>
-      <button class="app-button" @click="navigateSettings">Settings</button>
+      <button class="btn btn-primary" @click="navigateToHome">Home</button>
+      <button class="btn btn-default" @click="navigateSettings">Settings</button>
     </nav>
   </header>
 </template>

@@ -65,19 +65,21 @@ function createWidget(products: IProduct[]) {
     card.style.borderRadius = '6px'
     card.style.background = '#fff'
 
+    const url = window.location.hash + product.url.split('/').at(-1)
+
     const img = document.createElement('img')
     img.src = product.thumbnailUrl || ''
     img.style.width = '100%'
     img.style.objectFit = 'cover'
     img.style.cursor = 'pointer'
-    img.onclick = () => window.location.href = product.url
+    img.onclick = () => window.location.href = url
     card.appendChild(img)
 
     const name = document.createElement('div')
     name.textContent = product.name
     name.style.cursor = 'pointer'
     name.style.margin = '6px 0'
-    name.onclick = () => window.location.href = product.url
+    name.onclick = () => window.location.href = url
     card.appendChild(name)
 
     const buyBtn = document.createElement('button')

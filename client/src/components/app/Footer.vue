@@ -3,7 +3,7 @@
     <div class="footer-top">
       <div class="footer-section">
         <h4>About Us</h4>
-        <p>TrendyWear is your go-to shop for modern, sustainable, and comfortable clothing.</p>
+        <p>Ecwid is your go-to shop for modern, sustainable, and comfortable clothing.</p>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2025 TrendyWear. All rights reserved.</p>
+      <p>&copy; 2025 Ecwid. All rights reserved.</p>
     </div>
   </footer>
 </template>

@@ -1,62 +1,72 @@
 <template>
   <div class="ec-container">
 
-    <h1 class="ec-heading">Widget Settings</h1>
+    <!-- Export Section -->
+    <div class="a-card a-card--compact">
+      <div class="a-card__paddings">
+        <h2 class="ec-heading">Feature Description</h2>
 
-    <div class="ec-card">
-      <h3 class="ec-heading">Feature Description</h3>
-      <p>This widget shows the most recently updated products on the cart page. Customers can add them to cart directly.</p>
+        <p class="ec-text">
+          This widget shows the most recently updated products on the cart page.
+          Customers can add them to cart directly.
+        </p>
+      </div>
     </div>
 
-    <div class="ec-card">
-      <label class="ec-label">
-        <input type="checkbox" v-model="widgetEnabled" />
-        Enable Recently Updated Products Widget
-      </label>
+    <div class="a-card a-card--compact">
+      <div class="a-card__paddings">
+        <div class="custom-checkbox">
+          <label>
+            <input v-model="widgetEnabled"  type="checkbox" value="on" tabindex="0" class="custom-checkbox__input">
+            <span class="custom-checkbox__label"></span>
+            <span class="custom-checkbox__text">Enable Recently Updated Products Widget</span>
+          </label>
+        </div>
+      </div>
     </div>
 
-    <div class="ec-card">
-      <label class="ec-label">Default number of products:</label>
-      <select v-model="defaultProductCount" class="ec-select">
-        <option v-for="n in [2, 4, 6, 8]" :key="n" :value="n">{{ n }}</option>
-      </select>
+    <div class="a-card a-card--compact">
+      <div class="a-card__paddings">
+        <label class="ec-label">Default number of products:</label>
+        <select v-model="defaultProductCount" class="ec-select">
+          <option v-for="n in [2, 4, 6, 8]" :key="n" :value="n">{{ n }}</option>
+        </select>
+      </div>
     </div>
 
-    <div class="ec-card">
-      <h3 class="ec-heading">Export Catalog</h3>
-      <button class="ec-btn app" @click="fetchProducts">Load Products</button>
 
-      <button
-        v-if="selected.length"
-        class="ec-btn ec-btn--primary"
-        @click="exportCSV">
-        Export CSV
-      </button>
+      <div class="a-card a-card--compact">
+      <div class="a-card__paddings">
+        <h2 class="ec-heading">Export Catalog</h2>
 
-      <button
-          v-if="selected.length"
-          class="ec-btn ec-btn--primary"
-          @click="exportXLSX">
-          Export XLSX
-      </button>
+        <div class="ec-form-control ec-mb--2">
+          <button class="btn btn-default" @click="fetchProducts">Load Products</button>
 
-      <table v-if="products.length" class="ec-table">
-        <thead>
-        <tr>
-          <th><input type="checkbox" @change="toggleAll($event)" /></th>
-          <th>Name</th>
-          <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="p in products" :key="p.id">
-          <td><input type="checkbox" v-model="selected" :value="p" /></td>
-          <td>{{ p.name }}</td>
-          <td>{{ p.price }} {{ p.currency }}</td>
-        </tr>
-        </tbody>
-      </table>
+          <template v-if="selected.length">
+            <button class="ec-btn ec-btn--primary" @click="exportCSV">Export CSV</button>
+            <button class="ec-btn ec-btn--primary" @click="exportXLSX">Export XLSX</button>
+          </template>
+        </div>
+
+        <table v-if="products.length" class="ec-table">
+          <thead>
+          <tr>
+            <th><input type="checkbox" @change="toggleAll($event)" /></th>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="p in products" :key="p.id">
+            <td><input type="checkbox" v-model="selected" :value="p" /></td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.price }} {{ p.currency }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
   </div>
 </template>
 

@@ -1,4 +1,5 @@
 import { onMounted, onUnmounted } from 'vue'
+import { STORE_ID } from '@/consts'
 
 export function useEcwidStore(containerId: string) {
   const render = () => {
@@ -7,7 +8,7 @@ export function useEcwidStore(containerId: string) {
       'views=grid(20,3) list(60) table(60)',
       'categoryView=grid',
       'searchView=list',
-      'id=my-store-101560752'
+      `id=my-store-${STORE_ID}`
     )
   }
 
@@ -18,7 +19,7 @@ export function useEcwidStore(containerId: string) {
     }
 
     const script = document.createElement('script')
-    script.src = 'https://app.ecwid.com/script.js?101560752&data_platform=code&data_date=2020-05-26'
+    script.src = `https://app.ecwid.com/script.js?${STORE_ID}&data_platform=code&data_date=2020-05-26`
     script.async = true
     script.id = 'ecwid-script'
 

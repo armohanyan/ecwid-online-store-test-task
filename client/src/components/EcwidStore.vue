@@ -1,4 +1,3 @@
-<!-- components/EcwidStore.vue -->
 <template>
   <div id="ecwid-store-container">
     <div :id="containerId"></div>
@@ -11,8 +10,9 @@
 import { useEcwidStore } from '@/composables/useEcwid'
 import RecentlyUpdatedProducts from '@/components/RecentlyUpdatedProducts.vue'
 import {useStoreSettings} from "@/composables/useStoreSettings";
+import {STORE_ID} from '@/consts'
 
-const containerId = 'my-store-101560752'
+const containerId = 'my-store-' + STORE_ID
 useEcwidStore(containerId)
 
 const storeSettings = useStoreSettings()
