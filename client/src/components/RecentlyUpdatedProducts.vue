@@ -76,7 +76,32 @@ function goToProduct(product: IProduct) {
 }
 
 function buyNow(productId: number) {
-  window.Ecwid?.Cart?.addProduct(productId)
+  const tracked = JSON.parse(localStorage.getItem('addedFromWidget') || '[]');
+  if (!tracked.includes(productId)) tracked.push(productId);
+  localStorage.setItem('addedFromWidget', JSON.stringify(tracked));
+
+  updateOrderExtraFields()
+  window.Ecwid?.Cart?.addProduct(productId);
+}
+
+const updateOrderExtraFields = () => {
+  window.ec = window.ec || {}
+  window.ec.order = window.ec.order || {}
+  window.ec.order.extraFields = window.ec.order.extraFields || {}
+
+  const addedFromWidget = JSON.parse(localStorage.getItem('addedFromWidget') || '[]')
+
+  window.ec.order.extraFields.added_from_widget = {
+    title: 'Products Added via Widget',
+    value: addedFromWidget.join(', '),
+    type: 'TEXT',
+    orderDetailsDisplaySection: 'order_comments',
+    showInCustomerOrderDetails: true,
+    showInInvoices: false,
+    showInNotifications: true,
+  }
+
+  window.Ecwid && window.Ecwid.refreshConfig()
 }
 
 function waitForCartBody(): Promise<void> {
@@ -124,6 +149,7 @@ onMounted(() => {
   padding: 10px 20px !important;
   background-color: #275ce0 !important;
   color: #fff !important;
+  margin-top: 10px !important;
   border: 0 solid transparent;
   outline: 0;
   text-align: center;
