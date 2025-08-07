@@ -6,7 +6,7 @@ export function useEcwidLoader() {
   const waitForEcwidReady = (callback: () => void) => {
     const check = () => {
       if (window.Ecwid?.OnPageLoad) {
-        window.Ecwid.OnPageLoad.add(callback)
+        callback()
       } else {
         setTimeout(check, 300)
       }

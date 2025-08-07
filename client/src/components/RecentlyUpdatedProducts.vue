@@ -1,121 +1,134 @@
 <template>
-  <div id="recently-updated-products-widget"></div>
+
+  <Teleport v-if="isCartPage && targetReady" to=".ec-cart__body">
+    <div>
+      <h3 class="text-big">Recently Updated Products</h3>
+
+      <select v-model="numberOfRecentProducts" class="field__select" tabindex="1">
+        <option v-for="n in [2, 4, 6, 8]" :key="n" :value="n">Show {{ n }}</option>
+      </select>
+
+      <div
+        class="grid__products grid__products--large-items">
+        <div v-for="product in products"
+             :key="product.id" class="grid-product">
+          <div class="grid-product__wrap" >
+            <div class="grid-product__wrap-inner">
+
+              <img
+                :src="product.thumbnailUrl"
+                :alt="product.name"
+                @click="goToProduct(product)"
+              />
+
+              <div class="grid-product__title-inner" @click="goToProduct(product)">
+                {{ product.name }}
+              </div>
+
+              <div class="grid-product__price-amount">
+                <div class="grid-product__price-value ec-price-item">${{ product.price }}</div>
+              </div>
+
+              <button class="buy-button" @click="buyNow(product.id)">
+                Buy now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref} from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRecentProductsQuery } from '@/composables/useRecentProductsQuery'
-import {useEcwidLoader} from "@/composables/useEcwidLoader";
-import {useStoreSettings} from "@/composables/useStoreSettings";
+import { useEcwidLoader } from '@/composables/useEcwidLoader'
+import { useStoreSettings } from '@/composables/useStoreSettings'
 import { IProduct } from '@/types/product'
 
-const storeSettings =  useStoreSettings()
+const storeSettings = useStoreSettings()
 const ecwidLoader = useEcwidLoader()
 
-const numberOfRecentProducts = ref(storeSettings.defaultProductCount.value)
-const params = ref({ limit: numberOfRecentProducts.value, sortBy: 'UPDATED_TIME_DESC' })
+const numberOfRecentProducts = ref(2)
+const params = ref({
+  limit: numberOfRecentProducts.value,
+  sortBy: 'UPDATED_TIME_DESC',
+})
 
 const { refetch } = useRecentProductsQuery(params.value)
+const products = ref<IProduct[]>([])
+const isCartPage = ref(false)
+const targetReady = ref(false)
 
-function createWidget(products: IProduct[]) {
-  const containerId = 'recently-updated-products-widget'
-  let existing = document.getElementById(containerId)
-  if (existing) existing.remove()
+watch(numberOfRecentProducts, async (newVal) => {
+  params.value.limit = newVal
+  const result = await refetch()
 
-  const container = document.createElement('div')
-  container.id = containerId
-  container.style.padding = '16px'
-  container.style.borderTop = '1px solid #ccc'
-
-  const title = document.createElement('h3')
-  title.textContent = 'Recently Updated Products'
-  title.style.marginBottom = '12px'
-  container.appendChild(title)
-
-  const dropdown = document.createElement('select')
-  dropdown.innerHTML = [2, 4, 6, 8, 10].map(n =>
-      `<option value="${n}" ${n === numberOfRecentProducts.value ? 'selected' : ''}>Show ${n}</option>`
-  ).join('')
-
-  dropdown.onchange = async (e: Event) => {
-    const target = e.target as HTMLInputElement
-
-    numberOfRecentProducts.value = parseInt(target.value)
-    params.value.limit = numberOfRecentProducts.value
-
-    const result = await refetch()
-    if (result.data?.items) {
-      createWidget(result.data.items)
-    }
+  if (result?.data?.items) {
+    products.value = result.data.items
   }
+})
 
-  container.appendChild(dropdown)
+function goToProduct(product: IProduct) {
+  const slug = product.url.split('/').at(-1)
+  window.location.href = window.location.hash + slug
+}
 
-  const grid = document.createElement('div')
-  grid.style.display = 'grid'
-  grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))'
-  grid.style.gap = '12px'
-  grid.style.marginTop = '12px'
+function buyNow(productId: number) {
+  window.Ecwid?.Cart?.addProduct(productId)
+}
 
-  for (const product of products) {
-    const card = document.createElement('div')
-    card.style.border = '1px solid #eee'
-    card.style.padding = '8px'
-    card.style.textAlign = 'center'
-    card.style.borderRadius = '6px'
-    card.style.background = '#fff'
+function waitForCartBody(): Promise<void> {
+  return new Promise((resolve) => {
+    const interval = setInterval(() => {
+      const target = document.querySelector('.ec-cart__body')
 
-    const url = window.location.hash + product.url.split('/').at(-1)
-
-    const img = document.createElement('img')
-    img.src = product.thumbnailUrl || ''
-    img.style.width = '100%'
-    img.style.objectFit = 'cover'
-    img.style.cursor = 'pointer'
-    img.onclick = () => window.location.href = url
-    card.appendChild(img)
-
-    const name = document.createElement('div')
-    name.textContent = product.name
-    name.style.cursor = 'pointer'
-    name.style.margin = '6px 0'
-    name.onclick = () => window.location.href = url
-    card.appendChild(name)
-
-    const buyBtn = document.createElement('button')
-    buyBtn.textContent = 'Buy now'
-    buyBtn.onclick = () => {
-      window.Ecwid?.Cart?.addProduct(product.id)
-    }
-
-    buyBtn.style.padding = '6px 12px'
-    buyBtn.style.border = 'none'
-    buyBtn.style.background = '#3c77a4'
-    buyBtn.style.color = '#fff'
-    buyBtn.style.cursor = 'pointer'
-    buyBtn.style.borderRadius = '4px'
-    card.appendChild(buyBtn)
-
-    grid.appendChild(card)
-  }
-
-  container.appendChild(grid)
-
-  const target = document.querySelector('.ec-cart__body') || document.body
-  target.appendChild(container)
+      if (target) {
+        clearInterval(interval)
+        targetReady.value = true
+        resolve()
+      }
+    }, 100)
+  })
 }
 
 onMounted(() => {
   if (!storeSettings.widgetEnabled.value) return
 
-    ecwidLoader.waitForEcwidReady(() => {
-      window.Ecwid?.OnPageLoaded.add(async (page: { type: string }) => {
-        if (page.type !== 'CART') return
+  ecwidLoader.waitForEcwidReady(() => {
+    window.Ecwid?.OnPageLoaded.add(async (page: { type: string }) => {
+      isCartPage.value = page.type === 'CART'
 
-        const result = await refetch()
+      if (!isCartPage.value) return
 
-        createWidget(result?.data?.items || [])
-      })
+      await waitForCartBody()
+
+      const result = await refetch()
+      products.value = result?.data?.items || []
+    })
   })
 })
 </script>
+<style scoped>
+.grid-product__wrap-inner {
+  width: 250px !important;
+  min-height: 600px !important;
+}
+
+.ec-price-item {
+  font-weight: bold !important;
+}
+
+.buy-button {
+  padding: 10px 20px !important;
+  background-color: #275ce0 !important;
+  color: #fff !important;
+  border: 0 solid transparent;
+  outline: 0;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+}
+</style>
