@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { STORE_ID } from '@/consts'
+import { BASE_API_URL, STORE_ID, STORE_TOKEN } from '@/config'
 
 const instance = axios.create({
   timeout: 10000,
-  baseURL: import.meta.env.VITE_BASE_API_URL + STORE_ID,
+  baseURL: BASE_API_URL + STORE_ID,
 })
 
 instance.interceptors.request.use(
   (config) => {
-    const token = import.meta.env.VITE_TOKEN
+    const token = STORE_TOKEN
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`

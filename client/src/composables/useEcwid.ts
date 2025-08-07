@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted } from 'vue'
-import { STORE_ID } from '@/consts'
+import { STORE_ID } from '@/config'
 
 export function useEcwidStore(containerId: string) {
   const render = () => {

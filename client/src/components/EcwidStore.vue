@@ -10,7 +10,7 @@
 import { useEcwidStore } from '@/composables/useEcwid'
 import RecentlyUpdatedProducts from '@/components/RecentlyUpdatedProducts.vue'
 import {useStoreSettings} from "@/composables/useStoreSettings";
-import {STORE_ID} from '@/consts'
+import {STORE_ID} from '@/config'
 
 const containerId = 'my-store-' + STORE_ID
 useEcwidStore(containerId)
