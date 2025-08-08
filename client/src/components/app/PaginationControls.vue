@@ -29,7 +29,10 @@
             type="number"
             class="form-control input-medium"
             :value="currentPage"
-            @input="$emit('update:currentPage', parseInt($event.target?.value))"
+            @input="(event: Event) => {
+              const target = event.target as HTMLInputElement;
+              $emit('update:currentPage', parseInt(target.value, 10));
+            }"
             :min="1"
             :max="totalPages"
           />
