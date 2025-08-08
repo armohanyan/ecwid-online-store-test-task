@@ -7,7 +7,7 @@ import { computed } from 'vue'
 
 const route = useRoute()
 
-const {ecwidloaded, checkIfEcwidLoaded} = useEcwidLoader()
+const { ecwidloaded, checkIfEcwidLoaded } = useEcwidLoader()
 checkIfEcwidLoaded()
 
 const routeInLandingView = () => {

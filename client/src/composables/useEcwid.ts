@@ -44,5 +44,4 @@ export function useEcwidStore(containerId: string) {
     )
     recentlyUpdatedProductsWidget?.remove()
   })
-
 }

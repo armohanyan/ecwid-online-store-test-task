@@ -6,7 +6,7 @@ function getRecentProducts(params: {
   limit: number
   sortBy?: string
   responseFields?: string
-}): Promise<{ items: IProduct[], total: number }> {
+}): Promise<{ items: IProduct[]; total: number }> {
   return request({
     url: '/products',
     params: {

@@ -22,13 +22,14 @@
         </span>
       </button>
 
-      <span class="pagination__label">
+      <span class="pagination__label">called
         Page:
         <span class="pagination__current">
           <input
             type="number"
             class="form-control input-medium"
             :value="currentPage"
+            @input="$emit('update:currentPage', parseInt($event.target?.value))"
             :min="1"
             :max="totalPages"
           />

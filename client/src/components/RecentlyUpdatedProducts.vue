@@ -84,6 +84,7 @@ function buyNow(productId: number) {
   window.Ecwid?.Cart?.addProduct(productId);
 }
 
+// This is actually I did following by hint, but actually now sure how this should be printed in the end
 const updateOrderExtraFields = () => {
   window.ec = window.ec || {}
   window.ec.order = window.ec.order || {}

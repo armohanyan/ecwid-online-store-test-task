@@ -32,6 +32,6 @@ export function useEcwidLoader() {
   return {
     waitForEcwidReady,
     checkIfEcwidLoaded,
-    ecwidloaded
+    ecwidloaded,
   }
 }
