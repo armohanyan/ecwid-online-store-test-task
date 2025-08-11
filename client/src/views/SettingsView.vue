@@ -107,6 +107,7 @@
                     @update:currentPage="(value) => {
                       if (value * numberOfRecentProducts <= totalItems) {
                         currentPage = value
+                        selected = []
                       }
                     }"
                 />
