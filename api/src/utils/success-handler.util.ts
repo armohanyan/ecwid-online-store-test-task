@@ -45,4 +45,12 @@ export default class SuccessHandlerUtil {
     }
     return this._sendResponse(response, HttpStatusCodesUtil.OK, data);
   }
+  static handleExport(
+      response: Response,
+      next: NextFunction,
+      data?: unknown,
+  ): void {
+    return this._sendResponse(response, HttpStatusCodesUtil.OK, data);
+  }
+
 }

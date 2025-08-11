@@ -75,6 +75,7 @@ Create the following `.env` files:
 
 ```env
 VITE_BASE_API_URL=https://app.ecwid.com/api/v3/
+VITE_BASE_API_URL_LOCAL=http://localhost:3000
 VITE_STORE_ID=101560752
 VITE_TOKEN=public_ie55a1cQU472c1GBmeBqAVpL1ks3LFpu
 ```
@@ -82,7 +83,8 @@ VITE_TOKEN=public_ie55a1cQU472c1GBmeBqAVpL1ks3LFpu
 #### `/api/.env`
 
 ```env
-API_ORIGIN=http://localhost:3000/
+STORE_ID=101560752
+API_TOKEN=public_ie55a1cQU472c1GBmeBqAVpL1ks3LFpu
 ```
 
 ### 🐳 Running the App (via Docker)

@@ -13,7 +13,8 @@ declare global {
       }
       OnPageLoaded: {
         add: (callback: (page: { type: string }) => void) => void
-      }
+      },
+      openPage: (page: string, param: { id: number }) => void
     }
     ec?: {
       order?: {

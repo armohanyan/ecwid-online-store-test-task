@@ -18,10 +18,10 @@
               <img
                 :src="product.thumbnailUrl"
                 :alt="product.name"
-                @click="goToProduct(product)"
+                @click="goToProduct(product.id)"
               />
 
-              <div class="grid-product__title-inner" @click="goToProduct(product)">
+              <div class="grid-product__title-inner" @click="goToProduct(product.id)">
                 {{ product.name }}
               </div>
 
@@ -30,7 +30,7 @@
               </div>
 
               <button class="buy-button" @click="buyNow(product.id)">
-                Buy now
+               Add Cart
               </button>
             </div>
           </div>
@@ -50,7 +50,7 @@ import { IProduct } from '@/types/product'
 const storeSettings = useStoreSettings()
 const ecwidLoader = useEcwidLoader()
 
-const numberOfRecentProducts = ref(2)
+const numberOfRecentProducts = ref(storeSettings.defaultProductCount)
 const params = ref({
   limit: numberOfRecentProducts.value,
   sortBy: 'UPDATED_TIME_DESC',
@@ -70,9 +70,8 @@ watch(numberOfRecentProducts, async (newVal) => {
   }
 })
 
-function goToProduct(product: IProduct) {
-  const slug = product.url.split('/').at(-1)
-  window.location.href = window.location.hash + slug
+function goToProduct(productId: number) {
+  window.Ecwid?.openPage('product', { id: productId });
 }
 
 function buyNow(productId: number) {
@@ -148,14 +147,19 @@ onMounted(() => {
 
 .buy-button {
   padding: 10px 20px !important;
-  background-color: #275ce0 !important;
-  color: #fff !important;
   margin-top: 10px !important;
-  border: 0 solid transparent;
   outline: 0;
   text-align: center;
   cursor: pointer;
-  font-weight: 500;
-  border-radius: 6px;
+  border-radius: 3px;
+  border: 1px solid #ccc !important;
+  background-color: #fff !important;
+  color: #1c1917 !important;
+  font-weight: 600 !important;
+}
+
+.buy-button:hover {
+  background-color: #f6f6f6 !important;
+  transition: background-color 150ms ease-in, border-color 100ms ease !important;
 }
 </style>

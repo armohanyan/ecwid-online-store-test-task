@@ -1,8 +1,8 @@
-import request from '@/plugins/axios-interceptors/global.interceptor'
+import request from '@/plugins/axios-interceptors/remote.interceptor'
 import { IProduct } from '@/types/product'
 import { PRODUCT_FIELDS_USED } from '@/consts'
 
-function getRecentProducts(params: {
+function getRecentProductsRequest(params: {
   limit: number
   sortBy?: string
   responseFields?: string
@@ -16,4 +16,4 @@ function getRecentProducts(params: {
   })
 }
 
-export { getRecentProducts }
+export { getRecentProductsRequest }

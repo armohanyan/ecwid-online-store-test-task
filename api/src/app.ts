@@ -38,7 +38,7 @@ class App {
 
   private _setCors(): void {
     const corsOptions: CorsOptions = {
-      origin: process.env.CORS,
+      origin: config.CORS,
       methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
       allowedHeaders: ['Authorization', 'Content-Type', 'Origin'],
       credentials: true,
